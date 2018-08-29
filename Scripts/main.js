@@ -37,14 +37,14 @@ module.exports.loop = function () {
     // if not enough harvesters
     if (numberOfHarvesters < minimumNumberOfHarvesters) {
         // try to spawn one
-        name = Game.spawns.Spawn1.createCreep([WORK,WORK,CARRY,MOVE], undefined,
+        name = Game.spawns.Mainbase.createCreep([WORK,WORK,CARRY,MOVE], undefined,
             { role: 'harvester', working: false});
     }
     else {
         // else try to spawn an upgrader
         // small change from what you saw in the video: for upgraders it makes
         //  more sense to have two move parts because they have to travel further
-        name = Game.spawns.Spawn1.createCreep([WORK,CARRY,MOVE,MOVE], undefined,
+        name = Game.spawns.Mainbase.createCreep([WORK,CARRY,MOVE,MOVE], undefined,
             { role: 'upgrader', working: false});
     }
 
