@@ -28,7 +28,7 @@ module.exports.loop = function () {
     }
 
     //goal: have atleast 6 creeps at all times
-    var minimumNumberOfTotalCreeps = 6;
+    var minimumNumberOfTotalCreeps = 5;
     // goal: have 10 harvesters and as many upgraders as possible
     var minimumNumberOfHarvesters = 10;
     // _.sum will count the number of properties in Game.creeps filtered by the
@@ -40,7 +40,7 @@ module.exports.loop = function () {
     // if not enough creeps
     if (numberOfCreeps < minimumNumberOfTotalCreeps) {
       // try to spawn a basic harvester creep
-      name = Game.spawns.Mainbase.createCreep([WORK,WORK,CARRY,MOVE], undefined,
+      name = Game.spawns.Mainbase.createCreep([WORK,CARRY,MOVE], undefined,
               { role: 'harvester', working: false});
     }
     // if there are more than 6 total creeps
