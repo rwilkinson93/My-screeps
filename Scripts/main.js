@@ -74,4 +74,7 @@ module.exports.loop = function () {
     console.log("Total harvester creeps: " + numberOfHarvesters);
     //prints the number of upgrader creeps to the console
     console.log("Total upgrader creeps: " + (numberOfCreeps - numberOfHarvesters));
+    // line break in the console
+    // TO CHANGE: replace with console clear command and move to top of the loop
+    console.log("")
 };
