@@ -30,7 +30,7 @@ module.exports.loop = function () {
     //goal: have atleast 6 creeps at all times
     var minimumNumberOfTotalCreeps = 5;
     // goal: have 10 harvesters and as many upgraders as possible
-    var minimumNumberOfHarvesters = 10;
+    var minimumNumberOfHarvesters = 6;
     // _.sum will count the number of properties in Game.creeps filtered by the
     //  arrow function, which checks for the creep being a harvester
     var numberOfCreeps = Object.keys(Game.creeps).length
@@ -70,4 +70,8 @@ module.exports.loop = function () {
     console.log("Total energy: " + Game.spawns.Mainbase.room.energyAvailable);
     //prints the total number of creeps to the console.
     console.log("Total creeps: " + numberOfCreeps);
+    //prints the number of harvester creeps to the console.
+    console.log("Total harvester creeps: " + numberOfHarvesters);
+    //prints the number of upgrader creeps to the console
+    console.log("Total upgrader creeps: " + (numberOfCreeps - numberOfHarvesters));
 };
