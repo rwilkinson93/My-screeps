@@ -33,13 +33,14 @@ module.exports.loop = function () {
     var minimumNumberOfHarvesters = 10;
     // _.sum will count the number of properties in Game.creeps filtered by the
     //  arrow function, which checks for the creep being a harvester
+    var numberOfCreeps = Object.keys(Game.creeps).length
     var numberOfHarvesters = _.sum(Game.creeps, (c) => c.memory.role == 'harvester');
     var name = undefined;
 
     // if not enough creeps
-    if (Game.creeps.length < minimumNumberOfTotalCreeps) {
+    if (numberOfCreeps < minimumNumberOfTotalCreeps) {
       // try to spawn a basic harvester creep
-      name.Game.spawns.Mainbase.createCreep([WORK,WORK,CARRY,MOVE], undefined,
+      name = Game.spawns.Mainbase.createCreep([WORK,WORK,CARRY,MOVE], undefined,
               { role: 'harvester', working: false});
     }
     // if there are more than 6 total creeps
@@ -66,7 +67,7 @@ module.exports.loop = function () {
         console.log("Spawned new creep: " + name);
     }
     //prints the total energy available to the console
-    console.log("Total energy: " + Game.energyAvailable)
+    console.log("Total energy: " + Game.spawns.Mainbase.room.energyAvailable);
     //prints the total number of creeps to the console.
-    console.log("Total creeps: " + Game.creeps.length )
+    console.log("Total creeps: " + numberOfCreeps);
 };
