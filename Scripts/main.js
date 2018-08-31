@@ -96,7 +96,7 @@ module.exports.loop = function () {
     //prints the number of upgrader creeps to the console
     console.log("Total upgrader creeps: " + numberOfUpgraders);
     //prints the number of builder creeps to the console
-    console.log("Total upgrader creeps: " + numberOfBuilders);
+    console.log("Total builder creeps: " + numberOfBuilders);
     // line break in the console
     // TO CHANGE: replace with console clear command and move to top of the loop
     console.log("")
