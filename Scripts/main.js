@@ -70,7 +70,7 @@ module.exports.loop = function () {
         }
         else {
            if (numberOfBuilders < minimumNumberOfBuilders) {
-             name = Game.spawns.Spawn1.createCreep([WORK,WORK,CARRY,MOVE], undefined,
+             name = Game.spawns.Mainbase.createCreep([WORK,WORK,CARRY,MOVE], undefined,
               { role: 'builder', working: false});
            }
            else {
