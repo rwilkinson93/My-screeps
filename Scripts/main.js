@@ -1,6 +1,7 @@
 // import modules
 var roleHarvester = require('role.harvester');
 var roleUpgrader = require('role.upgrader');
+var roleBuilder = require('role.builder');
 
 module.exports.loop = function () {
     // check for memory entries of died creeps by iterating over Memory.creeps
@@ -25,16 +26,24 @@ module.exports.loop = function () {
         else if (creep.memory.role == 'upgrader') {
             roleUpgrader.run(creep);
         }
+        // if creep is builder, call builder script
+        else if (creep.memory.role == 'builder') {
+            roleBuilder.run(creep);
+        }
     }
 
     //goal: have atleast 6 creeps at all times
     var minimumNumberOfTotalCreeps = 5;
     // goal: have 10 harvesters and as many upgraders as possible
     var minimumNumberOfHarvesters = 6;
+    var minimumNumberOfBuilders = 1;
+    var minimumNumberOfUpgraders = 1;
     // _.sum will count the number of properties in Game.creeps filtered by the
-    //  arrow function, which checks for the creep being a harvester
+    //  arrow function, which checks for the creep being a certain role
     var numberOfCreeps = Object.keys(Game.creeps).length
     var numberOfHarvesters = _.sum(Game.creeps, (c) => c.memory.role == 'harvester');
+    var numberOfUpgraders = _.sum(Game.creeps, (c) => c.memory.role == 'upgrader');
+    var numberOfBuilders = _.sum(Game.creeps, (c) => c.memory.role == 'builder');
     var name = undefined;
 
     // if not enough creeps
@@ -52,11 +61,23 @@ module.exports.loop = function () {
               { role: 'harvester', working: false});
       }
       else {
+        if (numberOfUpgraders < minimumNumberOfUpgraders ) {
           // else try to spawn an upgrader
           // small change from what you saw in the video: for upgraders it makes
           //  more sense to have two move parts because they have to travel further
           name = Game.spawns.Mainbase.createCreep([WORK,CARRY,MOVE,MOVE], undefined,
               { role: 'upgrader', working: false});
+        }
+        else {
+           if (numberOfBuilders < minimumNumberOfBuilders) {
+             name = Game.spawns.Spawn1.createCreep([WORK,WORK,CARRY,MOVE], undefined,
+              { role: 'builder', working: false});
+           }
+           else {
+             name = Game.spawns.Mainbase.createCreep([WORK,CARRY,MOVE,MOVE], undefined,
+              { role: 'upgrader', working: false});
+           }
+        }
       }
     }
 
@@ -73,7 +94,9 @@ module.exports.loop = function () {
     //prints the number of harvester creeps to the console.
     console.log("Total harvester creeps: " + numberOfHarvesters);
     //prints the number of upgrader creeps to the console
-    console.log("Total upgrader creeps: " + (numberOfCreeps - numberOfHarvesters));
+    console.log("Total upgrader creeps: " + (numberOfUpgraders);
+    //prints the number of builder creeps to the console
+    console.log("Total upgrader creeps: " + (numberOfBuilders);
     // line break in the console
     // TO CHANGE: replace with console clear command and move to top of the loop
     console.log("")
