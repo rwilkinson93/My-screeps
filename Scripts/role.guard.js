@@ -9,7 +9,7 @@ module.exports = {
       creep.memory.target = creep.pos.findClosestByRange(FIND_HOSTILE_CREEPS);
 
       // if we find a target set working to true
-      if (target.pos != null) {
+      if (creep.memory.target.pos != null) {
         creep.memory.working = true;
       }
       // otherwise set working to false
