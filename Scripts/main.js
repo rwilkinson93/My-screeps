@@ -16,14 +16,6 @@ module.exports.loop = function () {
         }
     }
 
-    // gets the main spawn location
-    var baseLocation = Game.spawns.Mainbase.room;
-    //console.log("baseLocation = " + baseLocation);
-    //check for hostiles in the room
-    var hostiles = Game.rooms[baseLocation].find(FIND_CREEPS, {
-      filter: (c) => (c.owner != 'MysteryCloud')
-    });
-
     // for every creep name in Game.creeps
     for (let name in Game.creeps) {
         // get the creep object
@@ -46,6 +38,13 @@ module.exports.loop = function () {
             roleRepairer.run(creep);
         }
         else if (creep.memory.role == 'guard') {
+          // gets the main spawn location
+          let creepLoc = Game.spawns.Mainbase.room;
+          //console.log("baseLocation = " + baseLocation);
+          //check for hostiles in the room
+          var hostiles = Game.rooms[baseLocation].find(FIND_CREEPS, {
+            filter: (c) => (c.owner != 'MysteryCloud')
+          });
             if (hostiles.length > 0) {
                 roleGuard.run(creep);
           }
