@@ -5,6 +5,7 @@ var roleUpgrader = require('role.upgrader');
 var roleBuilder = require('role.builder');
 var roleRepairer = require('role.repairer');
 var roleGuard = require('role.guard');
+var roleScavenger = require('role.scavenger')
 
 module.exports.loop = function () {
 
@@ -77,6 +78,9 @@ module.exports.loop = function () {
     // if creep is repairer, call repairer script
     else if (creep.memory.role == 'repairer') {
         roleRepairer.run(creep);
+      }
+    else if (creep.memory.role == 'scavenger') {
+        roleScavenger.run(creep);
       }
     }
 
