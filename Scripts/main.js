@@ -62,7 +62,7 @@ module.exports.loop = function () {
     // if not enough creeps
      if (numberOfCreeps < minimumNumberOfTotalCreeps) {
        //create the smallest possible harvester
-       name = Game.spawns.Mainbase.createCreep([WORK,CARRY,MOVE], undefined
+       name = Game.spawns.Mainbase.createCreep([WORK,CARRY,MOVE], undefined,
             { role: 'harvester', working: false});
      }
     // if not enough harvesters
