@@ -97,7 +97,7 @@ module.exports.loop = function () {
     }
 
     if (!(name < 0)) {
-      console.console.log("Spawned new creep: " + name);
+      console.log("Spawned new creep: " + name);
     }
 
     //prints the total energy available to the console
