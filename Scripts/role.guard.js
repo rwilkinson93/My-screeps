@@ -9,7 +9,7 @@ module.exports = {
       creep.memory.target = creep.pos.findClosestByRange(FIND_HOSTILE_CREEPS);
 
       // if we find a target set working to true
-      if (creep.memory.target.pos != null) {
+      if (creep.memory.target.id != null) {
         creep.memory.working = true;
       }
       // otherwise set working to false
@@ -20,14 +20,14 @@ module.exports = {
       // if working is true try to attack target
       if (creep.memory.working == true ) {
         // if not in range
-        if (creep.attack(creep.memory.target.pos) == ERR_NOT_IN_RANGE) {
+        if (creep.attack(creep.memory.target.id) == ERR_NOT_IN_RANGE) {
           // move towards the target
-          creep.moveTo(creep.memory.target.pos);
+          creep.moveTo(creep.memory.target.id);
         }
         // if in range
         else {
           // attack
-          creep.attack(creep.memory.target.pos);
+          creep.attack(creep.memory.target.id);
         }
       }
     }
