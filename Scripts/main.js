@@ -28,9 +28,9 @@ module.exports.loop = function () {
   // gets the available energy in the room where Mainbase is
   var energyAvailable = Game.spawns.Mainbase.room.energyAvailable;
   // gets the total energy capacity in the room where Mainbase is
-  var energyCap = Game.spawns.Mainbase.room.energyCapacityAvailable
+  var energyCap = Game.spawns.Mainbase.room.energyCapacityAvailable;
   var name = undefined;
-  var mainRoom = Game.spawns.Mainbase.pos.roomName
+  var mainRoom = Game.spawns.Mainbase.pos.roomName;
   var findHostiles = Game.rooms.mainRoom.find(FIND_HOSTILE_CREEPS);
 
   // if the spawn Mainbase can find any hostile creeps
