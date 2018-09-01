@@ -40,6 +40,14 @@ module.exports.loop = function () {
         }
     }
 
+    // have spawns search for ememies
+    for (let name in Game.spawns) {
+      Memory.spawns[name].hostilesFound = false;
+      if (Game.spawns.[name].pos.find(FIND_HOSTILE_CREEPS) != null) {
+        Memory.spawns[name].hostilesFound = true;
+      }
+    }
+
     // for every creep name in Game.creeps
     for (let name in Game.creeps) {
         // get the creep object
