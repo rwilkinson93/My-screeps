@@ -56,21 +56,21 @@ module.exports.loop = function () {
         // if creep is harvester, call harvester script
         if (creep.memory.role == 'harvester') {
             roleHarvester.run(creep);
-        }
+          }
         // if creep is upgrader, call upgrader script
         else if (creep.memory.role == 'upgrader') {
             roleUpgrader.run(creep);
-        }
+          }
+        else if (creep.memory.role == 'guard') {
+                roleGuard.run(creep);
+          }
         // if creep is builder, call builder script
         else if (creep.memory.role == 'builder') {
             roleBuilder.run(creep);
-        }
+          }
         // if creep is repairer, call repairer script
         else if (creep.memory.role == 'repairer') {
             roleRepairer.run(creep);
-        }
-        else if (creep.memory.role == 'guard') {
-                roleGuard.run(creep);
           }
         }
 
