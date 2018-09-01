@@ -15,9 +15,8 @@ module.exports.loop = function () {
   var minimumNumberOfUpgraders = 1;
   var minimumNumberOfBuilders = 2;
   var minimumNumberOfRepairers = ((minimumNumberOfBuilders*2)-1);
-  //var maximumNumberOfCreeps = ((minimumNumberOfHarvesters + minimumNumberOfUpgraders + minimumNumberOfBuilders + minimumNumberOfRepairers) * 2);
   var cpuBuffer = (Game.cpu.limit / 2);
-  var maximumNumberOfCreeps = ((Game.cpu.limit *3)-cpuBuffer);
+  var maximumNumberOfWorkerCreeps = ((Game.cpu.limit *3)-cpuBuffer);
   // _.sum will count the number of properties in Game.creeps filtered by the
   //  arrow function, which checks for the creep being a certain role
   var numberOfCreeps = Object.keys(Game.creeps).length
@@ -120,8 +119,8 @@ module.exports.loop = function () {
       name = Game.spawns.Mainbase.createCustomCreep(energyAvailable, 'builder');
     }
     else {
-      // if the number of creeps is still less than maximumNumberOfCreeps
-      if ((numberOfCreeps - numberOfGuards) < maximumNumberOfCreeps) {
+      // if the number of (worker creeps - number of guards) is still less than maximumNumberOfWorkerCreeps
+      if ((numberOfCreeps - numberOfGuards) < maximumNumberOfWorkerCreeps) {
         // try to spawn a upgrader
         name = Game.spawns.Mainbase.createCustomCreep(energyAvailable, 'upgrader');
       }
@@ -132,7 +131,9 @@ module.exports.loop = function () {
     }
 
     //prints the total energy available to the console
-    console.log("Max creeps: " + maximumNumberOfCreeps + ". Total energy: " + energyAvailable);
+    console.log("Total worker creeps: " + (numberOfCreeps - numberOfGuards)+ ". Max worker creeps: " + maximumNumberOfWorkerCreeps);
+
+    console.log("Total energy: " + energyAvailable);
     //prints the total number of creeps to the console.
     console.log("Total creeps: " + numberOfCreeps);
     //prints the number of harvester creeps to the console.
