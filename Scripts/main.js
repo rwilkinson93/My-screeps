@@ -71,9 +71,9 @@ module.exports.loop = function () {
         name = Game.spawns.Mainbase.createCustomCreep(energyAvailable, 'harvester');
         // if spawning failed and we have no harvesters left
         if (name == ERR_NOT_ENOUGH_ENERGY && numberOfHarvesters == 0) {
-            // spawn one with what is available
-            name = Game.spawns.Mainbase.createCustomCreep(
-                Game.spawns.Mainbase.room.energyAvailable, 'harvester');
+            //create the smallest possible harvester
+            name = Game.spawns.Mainbase.createCreep([WORK,CARRY,MOVE], undefined,
+                 { role: 'harvester', working: false});
         }
     }
     // if not enough upgraders
