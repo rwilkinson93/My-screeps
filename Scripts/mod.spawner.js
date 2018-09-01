@@ -44,5 +44,5 @@ module.exports = {
     if (!(name < 0)) {
         console.log("Spawned new " + creep.memory.role + " creep: " + name);
     }
-  };
-}
+  }
+};
