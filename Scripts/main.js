@@ -68,7 +68,7 @@ module.exports.loop = function () {
     // if not enough harvesters
     else if (numberOfHarvesters < minimumNumberOfHarvesters) {
         // try to spawn one
-        name = Game.spawns.Mainbase.createCustomCreep(energy, 'harvester');
+        name = Game.spawns.Mainbase.createCustomCreep(energyAvailable, 'harvester');
         // if spawning failed and we have no harvesters left
         if (name == ERR_NOT_ENOUGH_ENERGY && numberOfHarvesters == 0) {
             // spawn one with what is available
@@ -79,21 +79,21 @@ module.exports.loop = function () {
     // if not enough upgraders
     else if (numberOfUpgraders < minimumNumberOfUpgraders) {
         // try to spawn one
-        name = Game.spawns.Mainbase.createCustomCreep(energy, 'upgrader');
+        name = Game.spawns.Mainbase.createCustomCreep(energyAvailable, 'upgrader');
     }
     // if not enough repairers
     else if (numberOfRepairers < minimumNumberOfRepairers) {
         // try to spawn one
-        name = Game.spawns.Mainbase.createCustomCreep(energy, 'repairer');
+        name = Game.spawns.Mainbase.createCustomCreep(energyAvailable, 'repairer');
     }
     // if not enough builders
     else if (numberOfBuilders < minimumNumberOfBuilders) {
         // try to spawn one
-        name = Game.spawns.Mainbase.createCustomCreep(energy, 'builder');
+        name = Game.spawns.Mainbase.createCustomCreep(energyAvailable, 'builder');
     }
     else {
         // else try to spawn a upgrader
-        name = Game.spawns.Mainbase.createCustomCreep(energy, 'upgrader');
+        name = Game.spawns.Mainbase.createCustomCreep(energyAvailable, 'upgrader');
     }
 
     if (!(name < 0)) {
@@ -101,7 +101,7 @@ module.exports.loop = function () {
     }
 
     //prints the total energy available to the console
-    console.log("Total energy: " + Game.spawns.Mainbase.room.energyAvailable);
+    console.log("Total energy: " + energyAvailable);
     //prints the total number of creeps to the console.
     console.log("Total creeps: " + numberOfCreeps);
     //prints the number of harvester creeps to the console.
