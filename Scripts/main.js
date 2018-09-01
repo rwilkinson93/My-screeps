@@ -30,10 +30,11 @@ module.exports.loop = function () {
   // gets the total energy capacity in the room where Mainbase is
   var energyCap = Game.spawns.Mainbase.room.energyCapacityAvailable
   var name = undefined;
-  var debug = Game.rooms.E9S39.find(FIND_HOSTILE_CREEPS)
+  var mainRoom = Game.spawns.Mainbase.pos.roomName
+  var findHostiles = Game.rooms.mainRoom.find(FIND_HOSTILE_CREEPS);
 
   // if the spawn Mainbase can find any hostile creeps
-  if (Game.rooms.E9S39.find(FIND_HOSTILE_CREEPS) != undefined )
+  if (findHostiles.length > 0 )
   {
     //set memory.hostilesFound to true to begin spawning guards
     Game.spawns.Mainbase.memory.hostilesFound = true;

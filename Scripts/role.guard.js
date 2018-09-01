@@ -30,13 +30,17 @@ module.exports = {
           creep.attack(creep.memory.target);
         }
       }
-      //move to homeFlag to get out of the way once enemies are gone
+      // if the guards are no longer needed
       if (creep.memory.working == false) {
-        if (creep.pos == creep.memory.homeFlag)
+        // if the creep is already at the location of homeFlag
+        if (creep.pos == creep.memory.homeFlag.pos)
         {
+          //suicide to reduce number of creeps
           creep.suicide();
         }
+        //else
         else {
+          //move to homeFlag to get out of the way once enemies are gone
           creep.moveTo(creep.memory.homeFlag);
         }
       }
