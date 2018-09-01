@@ -21,7 +21,7 @@ module.exports.loop = function () {
     //console.log("baseLocation = " + baseLocation);
     //check for hostiles in the room
     var hostiles = Game.rooms[baseLocation].find(FIND_CREEPS, {
-      filter: (c) => (c.owner != 'MysteryCloud'
+      filter: (c) => (c.owner != 'MysteryCloud')
     });
 
     // for every creep name in Game.creeps
