@@ -33,7 +33,7 @@ module.exports = {
       // if the guards are no longer needed
       if (creep.memory.working == false) {
         // if the creep is already at the location of homeFlag
-        if (creep.pos == creep.memory.homeFlag.pos)
+        if ((creep.pos.x == creep.memory.homeFlag.x) && (creep.pos.y == creep.memory.homeFlag.y))
         {
           //suicide to reduce number of creeps
           creep.suicide();
