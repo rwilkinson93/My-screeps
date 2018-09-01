@@ -6,8 +6,13 @@ module.exports = {
         // set working (scavenging) to false
         creep.memory.working = false;
       }
+      // if the creep is not scavenging and is empty
+      if (creep.memory.working == false && (creep.carry.energy == 0 )) {
+        // set working (scavenging) to true
+        creep.memory.working = true;
+      }
       // if creep is scavenging and is not at max energy yet
-      else if (creep.memory.working == true && (creep.carry.energy != creep.carryCapacity)){
+      if (creep.memory.working == true && (creep.carry.energy != creep.carryCapacity)){
         // if the target has not been defined
         if (creep.memory.target == undefined) {
           // try to find a target
@@ -29,7 +34,7 @@ module.exports = {
         }
       }
       // if creep is not scavenging and is carrying energy
-      else if (creep.memory.working == false && (creep.carry.energy <= creep.carryCapacity)) {
+      if (creep.memory.working == false && (creep.carry.energy <= creep.carryCapacity)) {
         // if the dropOffTarget has not yet been defined
         if (creep.memory.dropOffTarget == undefined) {
           // try to find a dropOffTarget
@@ -39,7 +44,7 @@ module.exports = {
                         || s.structureType == STRUCTURE_EXTENSION)
                         && s.energy < s.energyCapacity
               });
-          })
+          }
         }
         // if a dropOffTarget has been found
         else {
@@ -50,10 +55,5 @@ module.exports = {
             creep.moveTo(creep.memory.dropOffTarget);
           }
         }
-      // if the creep is not scavenging and is not at capacity
-      else {
-        // set working (scavenging) to true
-        creep.memory.working = true;
-      }
     }
 };
