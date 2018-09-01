@@ -32,7 +32,12 @@ module.exports = {
       }
       //move to homeFlag to get out of the way once enemies are gone
       if (creep.memory.working == false) {
+        if (creep.pos == creep.memory.homeFlag)
+        {
+          creep.suicide();
+        }
         creep.moveTo(creep.memory.homeFlag);
       }
+
     }
 };
