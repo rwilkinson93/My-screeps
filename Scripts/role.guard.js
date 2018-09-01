@@ -20,9 +20,9 @@ module.exports = {
       // if working is true try to attack target
       if (creep.memory.working == true ) {
         // if not in range
-        if (creep.attack(target) == ERR_NOT_IN_RANGE) {
+        if (creep.attack(creep.memory.target.pos) == ERR_NOT_IN_RANGE) {
           // move towards the target
-          creep.moveTo(target);
+          creep.moveTo(creep.memory.target.pos);
         }
         // if in range
         else {
