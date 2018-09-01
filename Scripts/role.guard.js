@@ -3,29 +3,31 @@ module.exports = {
 
 
     run: function(creep) {
-      // if the creep isnt doing anything
-      if (creep.memory.working == false) {
-        // switch state
+      //find the location of Mainbase and set this to the creeps home in memory
+      creep.memory.home = Game.spawns.Mainbase.pos;
+      //search the creeps current location for hostile creeps
+      creep.memory.target = creep.pos.findClosestByRange(FIND_HOSTILE_CREEPS);
+
+      // if we find a target set working to true
+      if (target != null) {
         creep.memory.working = true;
       }
-
-      //if the creep working
-      if (creep.memory.working == true) {
-        // try to find an enemy creep
-        var enemyLoc = creep.pos.findClosestByPath(FIND_HOSTILE_CREEPS, {});
-        // if we found one
-        if (enemyLoc != undefined) {
-            // try to attack, if not in range move towards the enemy
-            if (creep.attack(enemyLoc) == ERR_NOT_IN_RANGE) {
-              creep.moveTo(enemyLoc);
-            }
-            else {
-              creep.attack(enemyLoc);
-            }
-        }
-        // if we cant find an enemy go to sleep
-        else {
+      // otherwise set working to false
+      else {
         creep.memory.working = false;
+      }
+
+      // if working is true try to attack target
+      if (creep.memory.working == true ) {
+        // if not in range
+        if (creep.attack(target) == ERR_NOT_IN_RANGE) {
+          // move towards the target
+          creep.moveTo(target);
+        }
+        // if in range
+        else {
+          // attack
+          creep.attack(target);
         }
       }
     }

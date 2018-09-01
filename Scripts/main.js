@@ -7,6 +7,30 @@ var roleRepairer = require('role.repairer');
 var roleGuard = require('role.guard');
 
 module.exports.loop = function () {
+
+  //goal: have atleast 6 creeps at all times
+  var minimumNumberOfTotalCreeps = 3;
+  // goal: have 10 harvesters and as many upgraders as possible
+  var minimumNumberOfHarvesters = 8;
+  var minimumNumberOfUpgraders = 1;
+  var minimumNumberOfBuilders = 2;
+  var minimumNumberOfRepairers = ((minimumNumberOfBuilders*2)-1);
+  //var maximumNumberOfCreeps = ((minimumNumberOfHarvesters + minimumNumberOfUpgraders + minimumNumberOfBuilders + minimumNumberOfRepairers) * 2);
+  var cpuBuffer = (Game.cpu.limit / 2);
+  var maximumNumberOfCreeps = ((Game.cpu.limit *3)-cpuBuffer);
+  // _.sum will count the number of properties in Game.creeps filtered by the
+  //  arrow function, which checks for the creep being a certain role
+  var numberOfCreeps = Object.keys(Game.creeps).length
+  var numberOfHarvesters = _.sum(Game.creeps, (c) => c.memory.role == 'harvester');
+  var numberOfUpgraders = _.sum(Game.creeps, (c) => c.memory.role == 'upgrader');
+  var numberOfBuilders = _.sum(Game.creeps, (c) => c.memory.role == 'builder');
+  var numberOfRepairers = _.sum(Game.creeps, (c) => c.memory.role == 'repairer');
+  // gets the available energy in the room where Mainbase is
+  var energyAvailable = Game.spawns.Mainbase.room.energyAvailable;
+  // gets the total energy capacity in the room where Mainbase is
+  var energyCap = Game.spawns.Mainbase.room.energyCapacityAvailable
+  var name = undefined;
+
     // check for memory entries of died creeps by iterating over Memory.creeps
     for (let name in Memory.creeps) {
         // and checking if the creep is still alive
@@ -38,42 +62,10 @@ module.exports.loop = function () {
             roleRepairer.run(creep);
         }
         else if (creep.memory.role == 'guard') {
-          // gets the main spawn location
-          let creepLoc = Game.spawns.Mainbase.room;
-          //console.log("baseLocation = " + baseLocation);
-          //check for hostiles in the room
-          var hostiles = Game.rooms[baseLocation].find(FIND_CREEPS, {
-            filter: (c) => (c.owner != 'MysteryCloud')
-          });
-            if (hostiles.length > 0) {
                 roleGuard.run(creep);
           }
         }
     }
-
-    //goal: have atleast 6 creeps at all times
-    var minimumNumberOfTotalCreeps = 3;
-    // goal: have 10 harvesters and as many upgraders as possible
-    var minimumNumberOfHarvesters = 8;
-    var minimumNumberOfUpgraders = 1;
-    var minimumNumberOfBuilders = 2;
-    var minimumNumberOfRepairers = ((minimumNumberOfBuilders*2)-1);
-    //var maximumNumberOfCreeps = ((minimumNumberOfHarvesters + minimumNumberOfUpgraders + minimumNumberOfBuilders + minimumNumberOfRepairers) * 2);
-    var cpuBuffer = (Game.cpu.limit / 2);
-    var maximumNumberOfCreeps = ((Game.cpu.limit *3)-cpuBuffer);
-    // _.sum will count the number of properties in Game.creeps filtered by the
-    //  arrow function, which checks for the creep being a certain role
-    var numberOfCreeps = Object.keys(Game.creeps).length
-    var numberOfHarvesters = _.sum(Game.creeps, (c) => c.memory.role == 'harvester');
-    var numberOfUpgraders = _.sum(Game.creeps, (c) => c.memory.role == 'upgrader');
-    var numberOfBuilders = _.sum(Game.creeps, (c) => c.memory.role == 'builder');
-    var numberOfRepairers = _.sum(Game.creeps, (c) => c.memory.role == 'repairer');
-
-    // gets the available energy in the room where Mainbase is
-    var energyAvailable = Game.spawns.Mainbase.room.energyAvailable;
-    // gets the total energy capacity in the room where Mainbase is
-    var energyCap = Game.spawns.Mainbase.room.energyCapacityAvailable
-    var name = undefined;
 
     // if not enough creeps
      if (numberOfCreeps < minimumNumberOfTotalCreeps) {
