@@ -33,7 +33,7 @@ module.exports.loop = function () {
   var debug = Game.rooms.E9S39.find(FIND_HOSTILE_CREEPS)
 
   // if the spawn Mainbase can find any hostile creeps
-  if (Game.rooms.E9S39.find(FIND_HOSTILE_CREEPS) != null )
+  if (Game.rooms.E9S39.find(FIND_HOSTILE_CREEPS) != undefined )
   {
     //set memory.hostilesFound to true to begin spawning guards
     Game.spawns.Mainbase.memory.hostilesFound = true;
