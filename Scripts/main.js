@@ -20,7 +20,9 @@ module.exports.loop = function () {
     var baseLocation = Game.spawns.Mainbase.room;
     //console.log("baseLocation = " + baseLocation);
     //check for hostiles in the room
-    //var hostiles = Game.rooms[baseLocation].find(FIND_HOSTILE_CREEPS, {});
+    var hostiles = Game.rooms[baseLocation].find(FIND_CREEPS, {
+      filter: (c) => (c.owner != 'MysteryCloud'
+    });
 
     // for every creep name in Game.creeps
     for (let name in Game.creeps) {
@@ -107,8 +109,9 @@ module.exports.loop = function () {
         name = Game.spawns.Mainbase.createCustomCreep(energyAvailable, 'builder');
     }
     else {
+      // if the number of creeps is still less than maximumNumberOfCreeps
       if (numberOfCreeps < maximumNumberOfCreeps) {
-        // else try to spawn a upgrader
+        // try to spawn a upgrader
         name = Game.spawns.Mainbase.createCustomCreep(energyAvailable, 'upgrader');
       }
     }
