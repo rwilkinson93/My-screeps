@@ -4,6 +4,7 @@ var roleHarvester = require('role.harvester');
 var roleUpgrader = require('role.upgrader');
 var roleBuilder = require('role.builder');
 var roleRepairer = require('role.repairer');
+var roleGuard = require('role.guard');
 
 module.exports.loop = function () {
     // check for memory entries of died creeps by iterating over Memory.creeps
@@ -14,6 +15,11 @@ module.exports.loop = function () {
             delete Memory.creeps[name];
         }
     }
+
+    // gets the main spawn location
+    var baseLocation = Game.spawns.Mainbase.room;
+    //check for hostiles in the room
+    var hostiles = Game.rooms[baseLocation].find(FIND_HOSTILE_CREEPS);
 
     // for every creep name in Game.creeps
     for (let name in Game.creeps) {
@@ -35,6 +41,11 @@ module.exports.loop = function () {
         // if creep is repairer, call repairer script
         else if (creep.memory.role == 'repairer') {
             roleRepairer.run(creep);
+        }
+        else if (creep.memory.role == 'guard') {
+            if (hostiles.length > 0) {
+                roleGuard.run(creep);
+          }
         }
     }
 
@@ -102,7 +113,7 @@ module.exports.loop = function () {
     }
 
     if (!(name < 0)) {
-      console.log("Spawned new creep: " + name);
+        console.log("Spawned new creep: " + name);
     }
 
     //prints the total energy available to the console
