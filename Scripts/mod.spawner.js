@@ -1,20 +1,4 @@
 module.exports = {
-  //goal: have atleast 6 creeps at all times
-  var minimumNumberOfTotalCreeps = 5;
-  // goal: have 10 harvesters and as many upgraders as possible
-  var minimumNumberOfHarvesters = 6;
-  var minimumNumberOfBuilders = 3;
-  var minimumNumberOfUpgraders = 1;
-  var minimumNumberOfRepairers = ((minimumNumberOfBuilders*2)-1);
-  // _.sum will count the number of properties in Game.creeps filtered by the
-  //  arrow function, which checks for the creep being a certain role
-  var numberOfCreeps = Object.keys(Game.creeps).length
-  var numberOfHarvesters = _.sum(Game.creeps, (c) => c.memory.role == 'harvester');
-  var numberOfUpgraders = _.sum(Game.creeps, (c) => c.memory.role == 'upgrader');
-  var numberOfBuilders = _.sum(Game.creeps, (c) => c.memory.role == 'builder');
-  var numberOfRepairers = _.sum(Game.creeps, (c) => c.memory.role == 'repairer');
-  var name = undefined;
-
   run: function(spawn) {
     // if not enough creeps
     if (numberOfCreeps < minimumNumberOfTotalCreeps) {
