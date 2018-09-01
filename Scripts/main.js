@@ -65,7 +65,6 @@ module.exports.loop = function () {
                 roleGuard.run(creep);
           }
         }
-    }
 
     // if not enough creeps
      if (numberOfCreeps < minimumNumberOfTotalCreeps) {
