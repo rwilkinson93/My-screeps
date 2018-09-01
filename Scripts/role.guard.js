@@ -27,7 +27,7 @@ module.exports = {
         // if in range
         else {
           // attack
-          creep.attack(target);
+          creep.attack(creep.memory.target.pos);
         }
       }
     }
