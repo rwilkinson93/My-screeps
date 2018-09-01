@@ -30,6 +30,7 @@ module.exports.loop = function () {
   // gets the total energy capacity in the room where Mainbase is
   var energyCap = Game.spawns.Mainbase.room.energyCapacityAvailable
   var name = undefined;
+  var debug = Game.rooms.E9S39.find(FIND_HOSTILE_CREEPS)
 
   // if the spawn Mainbase can find any hostile creeps
   if (Game.rooms.E9S39.find(FIND_HOSTILE_CREEPS) != null )
@@ -150,5 +151,5 @@ module.exports.loop = function () {
     console.log("Total repairer creeps: " + numberOfRepairers);
     // line break in the console
     // TO CHANGE: replace with console clear command and move to top of the loop
-    console.log("")
+    console.log(debug)
 };
