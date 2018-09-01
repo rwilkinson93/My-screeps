@@ -25,6 +25,7 @@ module.exports.loop = function () {
   var numberOfUpgraders = _.sum(Game.creeps, (c) => c.memory.role == 'upgrader');
   var numberOfBuilders = _.sum(Game.creeps, (c) => c.memory.role == 'builder');
   var numberOfRepairers = _.sum(Game.creeps, (c) => c.memory.role == 'repairer');
+  var numberOfGuards = _.sum(Game.creeps, (c) => c.memory.role == 'guard');
   // gets the available energy in the room where Mainbase is
   var energyAvailable = Game.spawns.Mainbase.room.energyAvailable;
   // gets the total energy capacity in the room where Mainbase is
@@ -120,7 +121,7 @@ module.exports.loop = function () {
     }
     else {
       // if the number of creeps is still less than maximumNumberOfCreeps
-      if (numberOfCreeps < maximumNumberOfCreeps) {
+      if ((numberOfCreeps - numberOfGuards) < maximumNumberOfCreeps) {
         // try to spawn a upgrader
         name = Game.spawns.Mainbase.createCustomCreep(energyAvailable, 'upgrader');
       }
