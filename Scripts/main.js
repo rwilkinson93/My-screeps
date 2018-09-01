@@ -31,6 +31,18 @@ module.exports.loop = function () {
   var energyCap = Game.spawns.Mainbase.room.energyCapacityAvailable
   var name = undefined;
 
+  // if the spawn Mainbase can find any hostile creeps
+  if (Game.spawns.Mainbase.find(FIND_HOSTILE_CREEPS) != null )
+  {
+    //set memory.hostilesFound to true to begin spawning guards
+    Game.spawns.Mainbase.memory.hostilesFound = true;
+  }
+  // if no hostiles encountered
+  else {
+    // set memory.hostilesFound to false to stop spawning guards
+    Game.spawns.Mainbase.memory.hostilesFound = false;
+  }
+
     // check for memory entries of died creeps by iterating over Memory.creeps
     for (let name in Memory.creeps) {
         // and checking if the creep is still alive
@@ -47,6 +59,8 @@ module.exports.loop = function () {
     //    Memory.spawns.i.hostilesFound = true;
     //  }
     //}
+
+
 
     // for every creep name in Game.creeps
     for (let name in Game.creeps) {
