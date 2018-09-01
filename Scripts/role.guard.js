@@ -36,8 +36,9 @@ module.exports = {
         {
           creep.suicide();
         }
-        creep.moveTo(creep.memory.homeFlag);
+        else {
+          creep.moveTo(creep.memory.homeFlag);
+        }
       }
-
     }
 };
