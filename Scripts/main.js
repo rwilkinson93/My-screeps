@@ -104,7 +104,7 @@ module.exports.loop = function () {
     }
 
     //prints the total energy available to the console
-    console.log("Total energy: " + energyAvailable);
+    console.log("Max creeps: " + maximumNumberOfCreeps + ". Total energy: " + energyAvailable);
     //prints the total number of creeps to the console.
     console.log("Total creeps: " + numberOfCreeps);
     //prints the number of harvester creeps to the console.
