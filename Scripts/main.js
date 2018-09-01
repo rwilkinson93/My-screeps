@@ -54,9 +54,9 @@ module.exports.loop = function () {
     var numberOfRepairers = _.sum(Game.creeps, (c) => c.memory.role == 'repairer');
 
     // gets the available energy in the room where Mainbase is
-    var energyAvailable = Game.spawn.Mainbase.room.energyAvailable;
+    var energyAvailable = Game.spawns.Mainbase.room.energyAvailable;
     // gets the total energy capacity in the room where Mainbase is
-    var energyCap = Game.spawn.Mainbase.room.energyCapacityAvailable
+    var energyCap = Game.spawns.Mainbase.room.energyCapacityAvailable
     var name = undefined;
 
     // if not enough creeps
