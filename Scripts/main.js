@@ -18,6 +18,7 @@ module.exports.loop = function () {
 
     // gets the main spawn location
     var baseLocation = Game.spawns.Mainbase.room;
+    console.log("baseLocation = " + baseLocation);
     //check for hostiles in the room
     var hostiles = Game.rooms[baseLocation].find(FIND_HOSTILE_CREEPS);
 
