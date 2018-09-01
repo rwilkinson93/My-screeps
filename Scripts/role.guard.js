@@ -27,5 +27,6 @@ module.exports = {
         else {
         creep.memory.working = false;
         }
+      }
     }
 };
