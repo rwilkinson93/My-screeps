@@ -41,12 +41,12 @@ module.exports.loop = function () {
     }
 
     // have spawns search for ememies
-    for (let name in Game.spawns) {
-      Memory.spawns[name].hostilesFound = false;
-      if (Game.spawns.[name].pos.find(FIND_HOSTILE_CREEPS) != null) {
-        Memory.spawns[name].hostilesFound = true;
-      }
-    }
+    //for (const i in Game.spawns) {
+    //  Memory.spawns[i] = i.name;
+    //  if (Game.spawns.i.pos.find(FIND_HOSTILE_CREEPS) != null) {
+    //    Memory.spawns.i.hostilesFound = true;
+    //  }
+    //}
 
     // for every creep name in Game.creeps
     for (let name in Game.creeps) {
