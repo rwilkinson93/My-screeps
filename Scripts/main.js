@@ -41,7 +41,7 @@ module.exports.loop = function () {
     //goal: have atleast 6 creeps at all times
     var minimumNumberOfTotalCreeps = 3;
     // goal: have 10 harvesters and as many upgraders as possible
-    var minimumNumberOfHarvesters = 6;
+    var minimumNumberOfHarvesters = 8;
     var minimumNumberOfBuilders = 2;
     var minimumNumberOfUpgraders = 1;
     var minimumNumberOfRepairers = ((minimumNumberOfBuilders*2)-1);
