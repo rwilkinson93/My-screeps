@@ -16,18 +16,18 @@ module.exports = {
         // if the target has not been defined
         if (creep.memory.target == undefined) {
           // try to find a target
-          creep.memory.target = creep.pos.findClosestByPath(FIND_DROPPED_ENERGY);
+          creep.memory.target = creep.pos.findClosestByPath(FIND_DROPPED_RESOURCES, RESOURCE_ENERGY);
         }
         // if a target has been found
         else {
           // try to pick up energy
           // if the target is too far away
-          if (creep.pickup(creep.memory.target) == ERR_NOT_IN_RANGE) {
+          if (creep.pickup(creep.memory.target.pos) == ERR_NOT_IN_RANGE) {
             //move towards the target
             creep.moveTo(creep.memory.target);
           }
           // if the target is invalid
-          if (creep.pickup(creep.memory.target) == ERR_INVALID_TARGET) {
+          if (creep.pickup(creep.memory.target.pos) == ERR_INVALID_TARGET) {
             //reset the target to undefined
             creep.memory.target = undefined;
           }
