@@ -4,7 +4,7 @@ module.exports = {
 
     run: function(creep) {
       //find the location of Mainbase and set this to the creeps home in memory
-      creep.memory.home = Game.spawns.Mainbase.pos;
+      creep.memory.homeFlag = Game.flags.MusterPoint1.pos;
       //search the creeps current location for hostile creeps
       creep.memory.target = creep.pos.findClosestByRange(FIND_HOSTILE_CREEPS);
 
@@ -29,6 +29,10 @@ module.exports = {
           // attack
           creep.attack(creep.memory.target);
         }
+      }
+      //move to homeFlag to get out of the way once enemies are gone
+      if creep.memory.working == false) {
+        creep.moveTo(creep.memory.homeFlag);
       }
     }
 };
