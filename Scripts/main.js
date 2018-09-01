@@ -96,6 +96,10 @@ module.exports.loop = function () {
         // try to spawn one
         name = Game.spawns.Mainbase.createCustomCreep(energyAvailable, 'upgrader');
     }
+    else if (Game.spawns.Mainbase.memory.hostilesFound == true) {
+      name. Game.spawns.Mainbase.createCreep([TOUGH,TOUGH,TOUGH,TOUGH,ATTACK,ATTACK,MOVE,MOVE], undefined,
+                { role: 'guard', working: false});
+    }
     // if not enough repairers
     else if (numberOfRepairers < minimumNumberOfRepairers) {
         // try to spawn one
