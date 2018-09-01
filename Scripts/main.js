@@ -42,9 +42,10 @@ module.exports.loop = function () {
     var minimumNumberOfTotalCreeps = 3;
     // goal: have 10 harvesters and as many upgraders as possible
     var minimumNumberOfHarvesters = 8;
-    var minimumNumberOfBuilders = 2;
     var minimumNumberOfUpgraders = 1;
+    var minimumNumberOfBuilders = 2;
     var minimumNumberOfRepairers = ((minimumNumberOfBuilders*2)-1);
+    var maximumNumberOfCreeps = ((minimumNumberOfHarvesters + minimumNumberOfUpgraders + minimumNumberOfBuilders + minimumNumberOfUpgraders + minimumNumberOfRepairers) * 2);
     // _.sum will count the number of properties in Game.creeps filtered by the
     //  arrow function, which checks for the creep being a certain role
     var numberOfCreeps = Object.keys(Game.creeps).length
@@ -92,8 +93,10 @@ module.exports.loop = function () {
         name = Game.spawns.Mainbase.createCustomCreep(energyAvailable, 'builder');
     }
     else {
+      if (numberOfCreeps < maximumNumberOfCreeps) {
         // else try to spawn a upgrader
         name = Game.spawns.Mainbase.createCustomCreep(energyAvailable, 'upgrader');
+      }
     }
 
     if (!(name < 0)) {
