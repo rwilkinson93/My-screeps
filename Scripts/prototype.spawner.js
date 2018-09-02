@@ -18,4 +18,17 @@ module.exports = function() {
             // create creep with the created body and the given role
             return this.createCreep(body, undefined, { role: roleName, working: false });
         };
+    StructureSpawn.prototype.createScavenger =
+            // create a body as big as possible out of carry and move parts with the given energy
+            var numberOfParts = Math.floor(energy / 100);
+            var body = [];
+            for (let i = 0; i < numberOfParts; i++) {
+                body.push(CARRY);
+            }
+            for (let i = 0; i < numberOfParts; i++) {
+                body.push(MOVE);
+            }
+            // create creep with the created body and the given role
+            return this.createCreep(body, undefined, { role: roleName, working: false });
+        };
 };

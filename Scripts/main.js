@@ -125,7 +125,7 @@ module.exports.loop = function () {
       name = Game.spawns.Mainbase.createCustomCreep(energyAvailable, 'builder');
     }
     else if (numberOfScavengers < minimumNumberOfScavengers) {
-      name = Game.spawns.Mainbase.createCustomCreep(energyAvailable, 'scavenger');
+      name = Game.spawns.Mainbase.createScavenger(energyAvailable, 'scavenger');
     }
     else {
       // if the number of (worker creeps - number of guards) is still less than maximumNumberOfWorkerCreeps
