@@ -26,11 +26,6 @@ module.exports = {
             //move towards the target
             creep.moveTo(creep.memory.target);
           }
-          // if the target is invalid
-          else if (creep.pickup(creep.memory.target.pos) == ERR_INVALID_TARGET) {
-            //reset the target to undefined
-            creep.memory.target = undefined;
-          }
         }
       }
       // if creep is not scavenging and is carrying energy
