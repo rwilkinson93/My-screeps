@@ -28,12 +28,12 @@ module.exports = {
                         || s.structureType == STRUCTURE_EXTENSION)
                         && s.energy < s.energyCapacity
               });
+              // try to transfer energyCap
+              // if the dropOffTarget is too far away
+              if (creep.transfer(dropOffTarget, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+                // move towards it
+                creep.moveTo(dropOffTarget);
+                }
           }
-      // try to transfer energyCap
-      // if the dropOffTarget is too far away
-      if (creep.transfer(dropOffTarget, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-        // move towards it
-        creep.moveTo(dropOffTarget);
-        }
       }
     };
