@@ -15,6 +15,11 @@ module.exports = {
       if (creep.memory.working == true && (creep.carry.energy != creep.carryCapacity)){
         // if the target has not been defined
         target = creep.pos.findClosestByPath(FIND_DROPPED_RESOURCES, RESOURCE_ENERGY);
+        // if it still cant find a target
+        if (target == undefined) {
+          // look for tombstones that contain energy
+          target = creep.pos.findClosestByPath(FIND_TOMBSTONES, RESOURCE_ENERGY);
+        }
         // if a target has been found
         if (creep.pickup(target) == ERR_NOT_IN_RANGE) {
           //move towards the target
