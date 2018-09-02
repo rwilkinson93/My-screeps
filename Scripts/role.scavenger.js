@@ -27,7 +27,7 @@ module.exports = {
             creep.moveTo(creep.memory.target);
           }
           // if the target is invalid
-          if (creep.pickup(creep.memory.target.pos) == ERR_INVALID_TARGET) {
+          else if (creep.pickup(creep.memory.target.pos) == ERR_INVALID_TARGET) {
             //reset the target to undefined
             creep.memory.target = undefined;
           }
