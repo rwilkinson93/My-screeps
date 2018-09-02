@@ -108,12 +108,6 @@ module.exports.loop = function () {
       // try to spawn one
       name = Game.spawns.Mainbase.createCustomCreep(energyAvailable, 'upgrader');
     }
-    // if hostiles have been found
-    else if (Game.spawns.Mainbase.memory.hostilesFound == true) {
-      //try to spawn a guard
-      name = Game.spawns.Mainbase.createCreep([TOUGH,TOUGH,TOUGH,TOUGH,ATTACK,ATTACK,MOVE,MOVE], undefined,
-        { role: 'guard', working: false});
-    }
     // if not enough repairers
     else if (numberOfRepairers < minimumNumberOfRepairers) {
       // try to spawn one
@@ -123,6 +117,12 @@ module.exports.loop = function () {
     else if (numberOfBuilders < minimumNumberOfBuilders) {
       // try to spawn one
       name = Game.spawns.Mainbase.createCustomCreep(energyAvailable, 'builder');
+    }
+    // if hostiles have been found
+    else if (Game.spawns.Mainbase.memory.hostilesFound == true) {
+      //try to spawn a guard
+      name = Game.spawns.Mainbase.createCreep([TOUGH,TOUGH,TOUGH,TOUGH,ATTACK,ATTACK,MOVE,MOVE], undefined,
+        { role: 'guard', working: false});
     }
     else if (numberOfScavengers < minimumNumberOfScavengers) {
       name = Game.spawns.Mainbase.createScavenger(energyAvailable, 'scavenger');
