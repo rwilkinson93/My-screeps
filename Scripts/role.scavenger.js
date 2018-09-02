@@ -14,41 +14,27 @@ module.exports = {
       // if creep is scavenging and is not at max energy yet
       if (creep.memory.working == true && (creep.carry.energy != creep.carryCapacity)){
         // if the target has not been defined
-        if (creep.memory.target == undefined) {
-          // try to find a target
-          creep.memory.target = creep.pos.findClosestByRange(FIND_DROPPED_RESOURCES, RESOURCE_ENERGY);
-        }
+        target = creep.pos.findClosestByPath(FIND_DROPPED_RESOURCES, RESOURCE_ENERGY);
         // if a target has been found
-        else {
-          // try to pick up energy
-          // if the target is too far away
-          if (creep.pickup(creep.memory.target.pos) == ERR_NOT_IN_RANGE) {
-            //move towards the target
-            creep.moveTo(creep.memory.target);
-          }
+        console.log(creep.memory.target);
+        if (creep.pickup(target) == ERR_NOT_IN_RANGE) {
+          //move towards the target
+          creep.moveTo(target);
         }
       }
       // if creep is not scavenging and is carrying energy
       if (creep.memory.working == false && (creep.carry.energy <= creep.carryCapacity)) {
-        // if the dropOffTarget has not yet been defined
-        if (creep.memory.dropOffTarget == undefined) {
-          // try to find a dropOffTarget
-          // drop off targets are spawns/extensions that are not full
-          creep.memory.dropOffTarget = creep.pos.findClosestByPath(FIND_MY_STRUCTURES, {
+      dropOffTarget = creep.pos.findClosestByPath(FIND_MY_STRUCTURES, {
             filter: (s) => (s.structureType == STRUCTURE_SPAWN
                         || s.structureType == STRUCTURE_EXTENSION)
                         && s.energy < s.energyCapacity
               });
           }
+      // try to transfer energyCap
+      // if the dropOffTarget is too far away
+      if (creep.transfer(dropOffTarget, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+        // move towards it
+        creep.moveTo(dropOffTarget);
         }
-        // if a dropOffTarget has been found
-        else {
-          // try to transfer energyCap
-          // if the dropOffTarget is too far away
-          if (creep.transfer(creep.memory.dropOffTarget, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-            // move towards it
-            creep.moveTo(creep.memory.dropOffTarget);
-          }
-        }
-    }
-};
+      }
+    };

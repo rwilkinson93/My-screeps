@@ -16,6 +16,7 @@ module.exports.loop = function () {
   var minimumNumberOfUpgraders = 1;
   var minimumNumberOfBuilders = 2;
   var minimumNumberOfRepairers = ((minimumNumberOfBuilders*2)-1);
+  var minimumNumberOfScavengers = 1;
   var cpuBuffer = (Game.cpu.limit / 2);
   var maximumNumberOfWorkerCreeps = ((Game.cpu.limit *3)-cpuBuffer);
   // _.sum will count the number of properties in Game.creeps filtered by the
@@ -25,6 +26,7 @@ module.exports.loop = function () {
   var numberOfUpgraders = _.sum(Game.creeps, (c) => c.memory.role == 'upgrader');
   var numberOfBuilders = _.sum(Game.creeps, (c) => c.memory.role == 'builder');
   var numberOfRepairers = _.sum(Game.creeps, (c) => c.memory.role == 'repairer');
+  var numberOfScavengers = _.sum(Game.creeps, (c) => c.memory.role == 'scavenger');
   var numberOfGuards = _.sum(Game.creeps, (c) => c.memory.role == 'guard');
   // gets the available energy in the room where Mainbase is
   var energyAvailable = Game.spawns.Mainbase.room.energyAvailable;
@@ -121,6 +123,9 @@ module.exports.loop = function () {
     else if (numberOfBuilders < minimumNumberOfBuilders) {
       // try to spawn one
       name = Game.spawns.Mainbase.createCustomCreep(energyAvailable, 'builder');
+    }
+    else if (numberOfScavengers < minimumNumberOfScavengers) {
+      name = Game.spawns.Mainbase.createCustomCreep(energyAvailable, 'scavenger');
     }
     else {
       // if the number of (worker creeps - number of guards) is still less than maximumNumberOfWorkerCreeps
