@@ -16,7 +16,6 @@ module.exports = {
         // if the target has not been defined
         target = creep.pos.findClosestByPath(FIND_DROPPED_RESOURCES, RESOURCE_ENERGY);
         // if a target has been found
-        console.log(creep.memory.target);
         if (creep.pickup(target) == ERR_NOT_IN_RANGE) {
           //move towards the target
           creep.moveTo(target);
