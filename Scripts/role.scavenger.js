@@ -16,7 +16,7 @@ module.exports = {
         // if the target has not been defined
         if (creep.memory.target == undefined) {
           // try to find a target
-          creep.memory.target = creep.pos.findClosestByPath(FIND_DROPPED_RESOURCES, RESOURCE_ENERGY);
+          creep.memory.target = creep.pos.findClosestByRange(FIND_DROPPED_RESOURCES, RESOURCE_ENERGY);
         }
         // if a target has been found
         else {
