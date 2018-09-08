@@ -147,12 +147,12 @@ module.exports.loop = function () {
     // if not enough longDistanceHarvesters for W3N5
     else if (numberOfLongDistanceHarvestersTargetA < minimumNumberOfLongDistanceHarvestersTargetA) {
         // try to spawn one
-        name = Game.spawns.Mainbase.createLongDistanceHarvester(energy, 5, home, targetA, 0);
+        name = Game.spawns.Mainbase.createLongDistanceHarvester(energyAvailable, 5, home, targetA, 0);
     }
     // if not enough longDistanceHarvesters for W2N4
     else if (numberOfLongDistanceHarvestersTargetB < minimumNumberOfLongDistanceHarvestersTargetB) {
         // try to spawn one
-        name = Game.spawns.Mainbase.createLongDistanceHarvester(energy, 3, home, targetB, 0);
+        name = Game.spawns.Mainbase.createLongDistanceHarvester(energyAvailable, 3, home, targetB, 0);
     }
     else {
       // if the number of (worker creeps - number of guards) is still less than maximumNumberOfWorkerCreeps
