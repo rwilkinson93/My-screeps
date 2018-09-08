@@ -6,7 +6,7 @@ var roleBuilder = require('role.builder');
 var roleRepairer = require('role.repairer');
 var roleGuard = require('role.guard');
 var roleScavenger = require('role.scavenger')
-var roleLongDistanceHarvester = require('role.LongDistanceHarvester');
+var roleLongDistanceHarvester = require('role.longDistanceHarvester');
 
 var mainRoom = Game.spawns.Mainbase.pos.roomName;
 var home = mainRoom;
