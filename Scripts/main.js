@@ -80,7 +80,7 @@ module.exports.loop = function () {
     if (creep.memory.role == 'harvester') {
         roleHarvester.run(creep);
       }
-    else if (creep.memory.role == 'LongDistanceHarvester') {
+    else if (creep.memory.role == 'longDistanceHarvester') {
       roleLongDistanceHarvester.run(creep);
     }
     // if creep is upgrader, call upgrader script
