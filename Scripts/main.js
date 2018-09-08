@@ -6,13 +6,23 @@ var roleBuilder = require('role.builder');
 var roleRepairer = require('role.repairer');
 var roleGuard = require('role.guard');
 var roleScavenger = require('role.scavenger')
+var roleLongDistanceHarvester = require('role.roleLongDistanceHarvester');
+
+var mainRoom = Game.spawns.Mainbase.pos.roomName;
+var home = mainRoom;
+//targetA is the room ID of the first remote target for LDH
+var targetA = 'E14N48';
+//targetB is the room ID of the second remote target for LDH
+var targetB = 'E15N47';
 
 module.exports.loop = function () {
 
-  //goal: have atleast 6 creeps at all times
+  //goal: have atleast 3 creeps at all times
   var minimumNumberOfTotalCreeps = 3;
   // goal: have 10 harvesters and as many upgraders as possible
-  var minimumNumberOfHarvesters = 8;
+  var minimumNumberOfHarvesters = 6;
+  var minimumNumberOfLongDistanceHarvestersTargetA = 2;
+  var minimumNumberOfLongDistanceHarvestersTargetB = 1;
   var minimumNumberOfUpgraders = 1;
   var minimumNumberOfBuilders = 2;
   var minimumNumberOfRepairers = ((minimumNumberOfBuilders*2)-1);
@@ -27,13 +37,17 @@ module.exports.loop = function () {
   var numberOfBuilders = _.sum(Game.creeps, (c) => c.memory.role == 'builder');
   var numberOfRepairers = _.sum(Game.creeps, (c) => c.memory.role == 'repairer');
   var numberOfScavengers = _.sum(Game.creeps, (c) => c.memory.role == 'scavenger');
+  var numberOfLongDistanceHarvestersTargetA = _.sum(Game.creeps, (c) =>
+    c.memory.role == 'longDistanceHarvester' && c.memory.target == targetA);
+  var numberOfLongDistanceHarvestersTargetB = _.sum(Game.creeps, (c) =>
+    c.memory.role == 'longDistanceHarvester' && c.memory.target == targetB);
   var numberOfGuards = _.sum(Game.creeps, (c) => c.memory.role == 'guard');
   // gets the available energy in the room where Mainbase is
   var energyAvailable = Game.spawns.Mainbase.room.energyAvailable;
   // gets the total energy capacity in the room where Mainbase is
   var energyCap = Game.spawns.Mainbase.room.energyCapacityAvailable;
   var name = undefined;
-  var mainRoom = Game.spawns.Mainbase.pos.roomName;
+
   var findHostiles = (Game.spawns['Mainbase'].room.find(FIND_HOSTILE_CREEPS));
 
   // if the spawn Mainbase can find any hostile creeps
@@ -66,6 +80,9 @@ module.exports.loop = function () {
     if (creep.memory.role == 'harvester') {
         roleHarvester.run(creep);
       }
+    else if (creep.memory.role == 'LongDistanceHarvester') {
+      roleLongDistanceHarvester.run(creep);
+    }
     // if creep is upgrader, call upgrader script
     else if (creep.memory.role == 'upgrader') {
         roleUpgrader.run(creep);
@@ -126,6 +143,16 @@ module.exports.loop = function () {
     }
     else if (numberOfScavengers < minimumNumberOfScavengers) {
       name = Game.spawns.Mainbase.createScavenger(energyAvailable, 'scavenger');
+    }
+    // if not enough longDistanceHarvesters for W3N5
+    else if (numberOfLongDistanceHarvestersTargetA < minimumNumberOfLongDistanceHarvestersTargetA) {
+        // try to spawn one
+        name = Game.spawns.Mainbase.createLongDistanceHarvester(energy, 5, home, targetA, 0);
+    }
+    // if not enough longDistanceHarvesters for W2N4
+    else if (numberOfLongDistanceHarvestersTargetB < minimumNumberOfLongDistanceHarvestersTargetB) {
+        // try to spawn one
+        name = Game.spawns.Mainbase.createLongDistanceHarvester(energy, 3, home, targetB, 0);
     }
     else {
       // if the number of (worker creeps - number of guards) is still less than maximumNumberOfWorkerCreeps
