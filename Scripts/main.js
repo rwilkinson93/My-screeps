@@ -167,13 +167,16 @@ module.exports.loop = function () {
     }
 
     //prints the total energy available to the console
+    console.log("Total energy: " + energyAvailable);
+    //prints the total number of worker creeps and the max creeps to the console
     console.log("Total worker creeps: " + (numberOfCreeps - numberOfGuards)+ ". Max worker creeps: " + maximumNumberOfWorkerCreeps);
 
-    console.log("Total energy: " + energyAvailable);
     //prints the total number of creeps to the console.
     console.log("Total creeps: " + numberOfCreeps);
     //prints the number of harvester creeps to the console.
     console.log("Total harvester creeps: " + numberOfHarvesters);
+    //prints the number of LDH for targets A and B
+    console.log("Total LDH targetA: " + numberOfLongDistanceHarvestersTargetA + ". Total LDH targetB: " + numberOfLongDistanceHarvestersTargetB);
     //prints the number of upgrader creeps to the console
     console.log("Total upgrader creeps: " + numberOfUpgraders);
     //prints the number of builder creeps to the console
